@@ -18,7 +18,7 @@ let options = {
   rootMargin: '300px',
   threshold: 1.0,
 };
-let observer = new IntersectionObserver(scrollLoadMore, options);
+let observer = new IntersectionObserver(loadMoreNext, options);
 
 formElement.addEventListener('submit', onSubmitForm);
 
@@ -50,28 +50,26 @@ async function searchPhotos() {
   }
 }
 
-function scrollLoadMore(evt) {
-  if (evt.isIntersecting) {
-     pixabayApi.page += 1;
+function loadMoreNext(event) {
+  pixabayApi.page += 1;
+  if (event[0].isIntersecting) {
     searchMorePhotos();
   }
 }
 
 async function searchMorePhotos() {
   try {
-    const result = pixabayApi.page * 40;
-    const { data } = await pixabayApi.fetchPhotos();
-    gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+    const result = pixabayApi.page * pixabayApi.per_page;
+    const { data } = await pixabayApi.searchPhotos();
+    galleryElement.insertAdjacentHTML('beforeend', createMarkup(data.hits));
     if (result >= data.totalHits) {
-      Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      );
       observer.unobserve(target);
+      Notify.info("We're sorry, but you've reached the end of search results.");
       return;
     }
     simplelightbox.refresh();
-  } catch{
-    Notify.failure(
+  } catch {
+    return Notify.failure(
       'Oops! Something went wrong! Try reloading the page or make another choice!'
     );
   }
