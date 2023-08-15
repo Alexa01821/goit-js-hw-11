@@ -1,5 +1,5 @@
 export function createMarkup(array) {
-  return (markup = array
+  return markup = array
     .map(
       ({
         webformatURL,
@@ -33,5 +33,5 @@ export function createMarkup(array) {
           </div>`;
       }
     )
-    .join(''));
+    .join('');
 }
