@@ -46,8 +46,8 @@ input {
 input::placeholder {
   color: var(--color-green--);
 }
-input:focus-visible{
-    border-color: var(--color-green--);
+input:focus-visible {
+  border-color: var(--color-green--);
 }
 
 button {
@@ -73,7 +73,7 @@ button {
 }
 
 .photo-cards {
-  width: calc((100% - 2*20)/3);
+  width: calc((100% - 2 * 20) / 3);
   height: 240px;
   padding: 8px;
   border: 2px solid var(--color-green--);
@@ -89,24 +89,3 @@ button {
   padding: 0 1.5em;
   color: gray;
 }
-
-/* 
-
-.photo-card {
-    height: 240px;
-    width: 350px;
-    border-radius: 1em;
-    box-shadow: 0 10px 20px #dbdbdb;
-}
-
-.info {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 10px;
-    padding: 0 1.5em;
-    color: gray;
-}
-
- */
