@@ -63,14 +63,14 @@ async function searchMorePhotos() {
     const { data } = await pixabayApi.fetchPhotos();
     gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
     if (result >= data.totalHits) {
-      observer.unobserve(target);
       Notify.failure(
         "We're sorry, but you've reached the end of search results."
       );
+      observer.unobserve(target);
       return;
     }
     simplelightbox.refresh();
-  } catch (error) {
+  } catch{
     Notify.failure(
       'Oops! Something went wrong! Try reloading the page or make another choice!'
     );
