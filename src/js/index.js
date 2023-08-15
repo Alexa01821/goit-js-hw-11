@@ -68,9 +68,11 @@ async function searchMorePhotos() {
       return;
     }
     simplelightbox.refresh();
-  } catch {
+  }  catch {
     error => {
-      console.log(error);
+      return Notify.failure(
+        'Oops! Something went wrong! Try reloading the page or make another choice!'
+      );
     };
-  }
+  }   
 }
