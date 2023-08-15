@@ -70,9 +70,7 @@ async function searchMorePhotos() {
     simplelightbox.refresh();
   } catch {
     error => {
-      return Notify.failure(
-        'Oops! Something went wrong! Try reloading the page or make another choice!'
-      );
+      console.log(error);
     };
   }
 }
