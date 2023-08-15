@@ -50,26 +50,29 @@ async function searchPhotos() {
   }
 }
 
-function scrollLoadMore(entries, observer) {
-  entries.forEach(async entry => {
-    if (entry.isIntersecting) {
-      pixabayApiInstance.page += 1;
+function scrollLoadMore(evt) {
+  pixabayApi.page += 1;
+  if (evt[0].isIntersecting) {
+    searchMorePhotos();
+  }
+}
 
-      const response = await pixabayApiInstance.fetchHits();
-      const arrayImages = response.data.hits;
-
-      refs.divGalleryContainer.insertAdjacentHTML(
-        'beforeend',
-        createMarkup(arrayImages)
+async function searchMorePhotos() {
+  try {
+    const result = pixabayApi.page * 40;
+    const { data } = await pixabayApi.fetchPhotos();
+    gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+    if (result >= data.totalHits) {
+      observer.unobserve(target);
+      Notify.failure(
+        "We're sorry, but you've reached the end of search results."
       );
-      lightbox.refresh();
-
-      if (arrayImages <= PER_PAGE * pixabayApiInstance.page) {
-        Notiflix.Notify.failure(
-          'We`re sorry, but you`ve reached the end of search results.'
-        );
-        observer.unobserve(target);
-      }
+      return;
     }
-  });
+    simplelightbox.refresh();
+  } catch (error) {
+    Notify.failure(
+      'Oops! Something went wrong! Try reloading the page or make another choice!'
+    );
+  }
 }
