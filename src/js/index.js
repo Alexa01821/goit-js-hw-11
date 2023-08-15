@@ -51,8 +51,8 @@ async function searchPhotos() {
 }
 
 function scrollLoadMore(evt) {
-  pixabayApi.page += 1;
-  if (evt[0].isIntersecting) {
+  if (evt.isIntersecting) {
+     pixabayApi.page += 1;
     searchMorePhotos();
   }
 }
