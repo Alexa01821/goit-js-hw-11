@@ -1,5 +1,5 @@
 export function createMarkup(array) {
-  return markup = array
+  return array
     .map(
       ({
         webformatURL,
@@ -10,7 +10,7 @@ export function createMarkup(array) {
         comments,
         downloads,
       }) => {
-        return `<div class="photo-cards">
+        `<div class="photo-cards">
           <div class="img-wrapper">
               <a class="gallery-link" href="${largeImageURL}">
                   <img src="${webformatURL}" alt="${tags}" width="300" loading="lazy" />
