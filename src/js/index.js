@@ -51,15 +51,15 @@ async function searchPhotos() {
 }
 
 function loadMoreNext(event) {
-  pixabayApi.page += 1;
   if (event[0].isIntersecting) {
+    pixabayApi.page += 1;
     searchMorePhotos();
   }
 }
 
 async function searchMorePhotos() {
   try {
-    const result = pixabayApi.page * pixabayApi.per_page;
+    const result = pixabayApi.page * 40;
     const { data } = await pixabayApi.searchPhotos();
     galleryElement.insertAdjacentHTML('beforeend', createMarkup(data.hits));
     if (result >= data.totalHits) {
